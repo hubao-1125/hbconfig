@@ -9,14 +9,19 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
+import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
 @EnableConfigurationProperties(HbDemoConfig.class)
 @EnableHBConfig
+@RestController
 public class HbconfigDemoApplication {
 
     @Value("${hb.a}")
     private String a;
+
+    @Value("${hb.b}")
+    private String b;
 
     @Autowired
     private HbDemoConfig hbDemoConfig;

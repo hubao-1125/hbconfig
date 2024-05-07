@@ -1,6 +1,6 @@
 package io.github.hubao.hbconfig.client.annotation;
 
-import io.github.hubao.hbconfig.client.HBConfigRegistrar;
+import io.github.hubao.hbconfig.client.config.HBConfigRegistrar;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;

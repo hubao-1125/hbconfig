@@ -1,6 +1,5 @@
-package io.github.hubao.hbconfig.client;
+package io.github.hubao.hbconfig.client.config;
 
-import io.github.hubao.hbconfig.client.config.HBConfigService;
 import org.springframework.core.env.EnumerablePropertySource;
 
 /*

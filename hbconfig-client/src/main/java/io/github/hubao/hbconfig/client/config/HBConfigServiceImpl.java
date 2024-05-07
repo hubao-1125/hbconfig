@@ -1,5 +1,8 @@
 package io.github.hubao.hbconfig.client.config;
 
+import org.springframework.cloud.context.environment.EnvironmentChangeEvent;
+import org.springframework.context.ApplicationContext;
+
 import java.util.Map;
 
 /*
@@ -11,8 +14,10 @@ import java.util.Map;
 public class HBConfigServiceImpl implements HBConfigService {
 
     Map<String, String> config;
+    ApplicationContext applicationContext;
 
-    public HBConfigServiceImpl(Map<String, String> config) {
+    public HBConfigServiceImpl(ApplicationContext applicationContext, Map<String, String> config) {
+        this.applicationContext = applicationContext;
         this.config = config;
     }
 
@@ -24,5 +29,14 @@ public class HBConfigServiceImpl implements HBConfigService {
     @Override
     public String getProperty(String name) {
         return this.config.get(name);
+    }
+
+    @Override
+    public void onChange(ChangeEvent event) {
+        this.config = event.config();
+        if(!config.isEmpty()) {
+            System.out.println("[HBCONFIG] fire an EnvironmentChangeEvent with keys:" + config.keySet());
+            applicationContext.publishEvent(new EnvironmentChangeEvent(config.keySet()));
+        }
     }
 }
