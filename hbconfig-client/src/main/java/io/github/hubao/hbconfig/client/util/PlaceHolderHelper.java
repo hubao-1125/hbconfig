@@ -110,7 +110,7 @@ public class PlaceHolderHelper {
                     stack.push(placeholderCandidate.substring(0, separatorIndex));
                     String defaultValuePart =
                             normalizeToPlaceholder(placeholderCandidate.substring(separatorIndex + VALUE_SEPARATOR.length()));
-                    if (!StringUtils.hasText(defaultValuePart)) {
+                    if (StringUtils.hasText(defaultValuePart)) {
                         stack.push(defaultValuePart);
                     }
                 }
