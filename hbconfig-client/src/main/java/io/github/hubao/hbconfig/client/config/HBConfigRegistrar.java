@@ -1,5 +1,6 @@
 package io.github.hubao.hbconfig.client.config;
 
+import io.github.hubao.hbconfig.client.value.SpringValueProcessor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
@@ -21,14 +22,17 @@ public class HBConfigRegistrar implements ImportBeanDefinitionRegistrar {
 
     @Override
     public void registerBeanDefinitions(AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry) {
-//        ImportBeanDefinitionRegistrar.super.registerBeanDefinitions(importingClassMetadata, registry);
-        System.out.println("register PropertySourcesProcessor");
-        Optional<String> first = Arrays.stream(registry.getBeanDefinitionNames()).filter(i -> i.equals(PropertySourcesProcessor.class.getName())).findFirst();
+        registerClass(registry, PropertySourcesProcessor.class);
+        registerClass(registry, SpringValueProcessor.class);
+    }
+
+    private static void registerClass(BeanDefinitionRegistry registry, Class<?> aClass) {
+        Optional<String> first = Arrays.stream(registry.getBeanDefinitionNames()).filter(i -> i.equals(aClass.getName())).findFirst();
         if (first.isPresent()) {
-            System.out.println("register PropertySourcesProcessor is already register.");
+            log.info("register PropertySourcesProcessor is already register.");
             return;
         }
-        AbstractBeanDefinition beanDefinition = BeanDefinitionBuilder.genericBeanDefinition(PropertySourcesProcessor.class).getBeanDefinition();
-        registry.registerBeanDefinition(PropertySourcesProcessor.class.getName(), beanDefinition);
+        AbstractBeanDefinition beanDefinition = BeanDefinitionBuilder.genericBeanDefinition(aClass).getBeanDefinition();
+        registry.registerBeanDefinition(aClass.getName(), beanDefinition);
     }
 }

@@ -7,8 +7,13 @@ Content-Type: application/json
 
 
 {
-  "hb.a": "dev200",
+  "hb.a": "dev2001",
   "hb.c": "cc200",
   "hb.d": "dd200"
 }
 
+### version
+GET http://localhost:9129/version?app=app1&env=dev&ns=public
+
+### demo 8888
+GET http://localhost:8080/demo

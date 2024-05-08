@@ -19,5 +19,5 @@ public class Configs {
     private String env;
     private String ns;
     private String pkey;
-    private String pValue;
+    private String pval;
 }

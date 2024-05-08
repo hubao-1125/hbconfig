@@ -10,4 +10,4 @@ hb:
 logging:
     level:
         root: info
-        cn.kimmking: debug
+        cn.kimmking: info

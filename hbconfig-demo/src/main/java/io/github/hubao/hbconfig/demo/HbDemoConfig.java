@@ -14,4 +14,5 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class HbDemoConfig {
 
     String a;
+    String b;
 }

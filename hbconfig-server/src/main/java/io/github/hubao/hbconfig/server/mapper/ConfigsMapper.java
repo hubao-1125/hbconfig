@@ -25,9 +25,9 @@ public interface ConfigsMapper {
     @Select("select * from configs where app = #{app} and env = #{env} and ns = #{ns} and pkey = #{pkey}")
     Configs select(String app, String env, String ns, String pkey);
 
-    @Insert("insert into configs(app, env, ns, pkey, pvalue) values(#{app}, #{env}, #{ns}, #{pkey}, #{pValue})")
+    @Insert("insert into configs(app, env, ns, pkey, pval) values(#{app}, #{env}, #{ns}, #{pkey}, #{pval})")
     void insert(Configs configs);
 
-    @Update("update configs set pvalue = #{pValue} where app = #{app} and env = #{env} and ns = #{ns} and pkey = #{pkey}")
+    @Update("update configs set pval = #{pval} where app = #{app} and env = #{env} and ns = #{ns} and pkey = #{pkey}")
     void update(Configs configs);
 }

@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -22,6 +23,7 @@ public class HbConfigController {
 
     @Autowired
     ConfigsMapper configsMapper;
+    Map<String, Long> VERSIONS = new HashMap<>();
 
     @GetMapping(value = "/list")
     public List<Configs> list(String app, String env, String ns) {
@@ -37,7 +39,7 @@ public class HbConfigController {
         params.forEach((k, v) -> {
             insertOrUpdate(new Configs(app, env, ns, k, v));
         });
-
+        VERSIONS.put(app + "-" + env + "-" + ns, System.currentTimeMillis());
         return configsMapper.list(app, env, ns);
     }
 
@@ -48,5 +50,10 @@ public class HbConfigController {
         } else {
             configsMapper.update(configs);
         }
+    }
+
+    @GetMapping("/version")
+    public long version(String app, String env, String ns) {
+        return VERSIONS.getOrDefault(app + "-" + env + "-" + ns, -1L);
     }
 }
