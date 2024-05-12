@@ -22,6 +22,9 @@ import java.util.Objects;
 public class HbConfigController {
 
     @Autowired
+    DistributedLocks distributedLocks;
+
+    @Autowired
     ConfigsMapper configsMapper;
     Map<String, Long> VERSIONS = new HashMap<>();
 
@@ -55,5 +58,10 @@ public class HbConfigController {
     @GetMapping("/version")
     public long version(String app, String env, String ns) {
         return VERSIONS.getOrDefault(app + "-" + env + "-" + ns, -1L);
+    }
+
+    @GetMapping("/status")
+    public boolean status() {
+        return distributedLocks.getLocked().get();
     }
 }

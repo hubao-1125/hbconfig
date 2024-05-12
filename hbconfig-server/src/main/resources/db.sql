@@ -9,3 +9,10 @@ create table if not exists `configs` (
 insert into `configs` (`app`, `env`, `ns`, `pkey`, `pval`) values ('app1', 'dev', 'public', 'hb.a', 'dev100');
 insert into `configs` (`app`, `env`, `ns`, `pkey`, `pval`) values ('app1', 'dev', 'public', 'hb.b', 'http://localhost:9192');
 insert into `configs` (`app`, `env`, `ns`, `pkey`, `pval`) values ('app1', 'dev', 'public', 'hb.c', 'cc100');
+
+create table if not exists `locks` (
+    `id` int primary key not null,
+    `app` varchar(64) not null
+);
+
+insert into `locks` (`id`, `app`) values (1, 'hbconfig-server');
